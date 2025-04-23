@@ -1,0 +1,336 @@
+{% extends "baselayout.html" %}
+{% block body %}
+
+<div class="container-fluid" style="position: relative">
+      <div class="row">
+        <div class="col pt-1 fst-italic" align="right">
+            **Last Updated On: {{lastmobupdatedon}}
+        </div>
+      </div>
+</div>
+
+<div class="container-fluid" >
+    <div class="row" >
+        <div class="col" style="width:100px;height:100px">
+           <canvas id="mobexternalstatus" ></canvas>
+        </div>
+        <div class="col" style="width:100px;height:100px">
+         <!--canvas id="myChartfour" ></canvas-->
+        </div>
+        <div class="col" style="width:100px;height:100spx">
+           <canvas id="mobinternalstatus" ></canvas>
+        </div>
+
+     </div>
+</div>
+<!--/br></br></br></br></br></br></br></br></br></br-->
+<div class="container-fluid">
+      <div class="row" >
+        <div class="col">
+            <canvas id="mobexternaljira" style="width:240px;height:35px"></canvas>
+        </div>
+      </div>
+</div>
+<div class="container-fluid">
+      <div class="row" >
+        <div class="col">
+            <canvas id="mobinternaljira" style="width:240px;height:35px"></canvas>
+        </div>
+      </div>
+</div>
+
+
+
+<script>
+    const ctxoneone = document.getElementById('mobexternalstatus').getContext('2d');
+    const mobexternalstatus = new Chart(ctxoneone, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for key in externaltop5mobstatuskeys %}'{{key}}',{% endfor %}],
+            datasets: [{
+                label: '#',
+                data: [{% for value in externaltop5mobstatusvalues %}{{value}},{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255,1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+                  formatter: function(value, context) {
+                  return context.chart.data.datasets[0].data[context.dataIndex];
+                }
+            }
+          },
+          legend: { display: true },
+          title: {
+            display: true,
+            text: 'Field Jira Top 5 Status'
+          }
+        }
+    });
+
+</script>
+
+
+<script>
+    const ctxtwo = document.getElementById('mobinternalstatus').getContext('2d');
+    const mobinternalstatus = new Chart(ctxtwo, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for key in internaltop5mobstatuskeys %}'{{key}}',{% endfor %}],
+            datasets: [{
+                label: '#',
+                data: [{% for value in internaltop5mobstatusvalues %}{{value}},{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+                  formatter: function(value, context) {
+                  return context.chart.data.datasets[0].data[context.dataIndex];
+                }
+            }
+          },
+          legend: { display: true },
+          title: {
+            display: true,
+            text: 'QA Jira Top 5 Status'
+          }
+        }
+    });
+
+</script>
+
+<script>
+const ctxthree = document.getElementById('mobexternaljira').getContext('2d');
+const mobexternaljira = new Chart(ctxthree, {
+    type: 'bar',
+    data: {
+        labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+        datasets: [{
+            label: '#',
+            data: [{% for jira in mobexternaldailyjira %}{{jira}},{% endfor %}],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1
+
+        }]
+    },
+     options: {
+     plugins: {
+            datalabels: {
+                  formatter: function(value, context) {
+                  return context.chart.data.datasets[0].data[context.dataIndex];
+                }
+            }
+          },
+      legend: { display: false },
+
+      title: {
+        display: true,
+        text: 'MOB Jiras Reported From Field. Total Jiras: {{totalmobexternaldailyjira}}'
+      }
+
+    }
+
+});
+
+</script>
+
+<script>
+const ctxfour = document.getElementById('mobinternaljira').getContext('2d');
+const mobinternaljira = new Chart(ctxfour, {
+    type: 'line',
+    data: {
+        labels: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+        datasets: [{
+            label: '#',
+            data: [{% for jira in mobdailyjira %}{{jira}},{% endfor %}],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+            ],
+            borderWidth: 1
+
+        }]
+    },
+     options: {
+      legend: { display: false },
+
+      title: {
+        display: true,
+        text: 'MOB Jiras Reported By QA Team. Total Jiras: {{totalmobdailyjira}}'
+      }
+
+    }
+
+});
+
+</script>
+
+
+
+
+
+
+
+{% endblock body %}

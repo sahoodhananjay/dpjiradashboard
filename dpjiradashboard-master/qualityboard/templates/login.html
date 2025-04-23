@@ -1,0 +1,57 @@
+{% extends "prelogin.html" %}
+{% load socialaccount %}
+{% block body %}
+
+{# Commenting this #}
+
+</br></br></br>
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+    <div class="col" align="center">
+      <h1>Welcome To Dialpad Product Health Monitoring Dashboard</h1>
+    </div>
+  </div>
+  </br>
+  <div class="row">
+    <div class="col" align="center">
+        <h1>Login</h1>
+    </div>
+  </div>
+  </br>
+
+    {% if message %}
+    <ul align="center">{{message}}</ul>
+    {% endif %}
+
+  <form action="{% url 'qualityboard:login' %}"  method="POST">
+    {%csrf_token%}
+  <div class="row">
+    <div class="form-floating mb-3" align="center" style="width:300px; margin:0 auto;">
+      <input type="text" class="form-control" id="username" placeholder="username", name="username">
+      <label for="floatingInput" style="margin:2px">Username</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-floating" align="center" style="width:300px; margin:0 auto;">
+      <input type="password" class="form-control" id="password" placeholder="Password", name="password">
+      <label for="floatingPassword" style="margin:2px">Password</label>
+    </div>
+  </div>
+  </br>
+  <div class="row">
+      <div class="col" align="center">
+          <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+  </div>
+  </form>
+  <p class="mt-3" align="center"> -- OR --</p>
+  <p align="center"><a href="{% provider_login_url 'google' %}" type='button' class="btn btn-outline-primary">Log in with Google</a></p>
+
+
+</div>
+
+
+
+
+
+{% endblock body %}

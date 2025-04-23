@@ -1,0 +1,179 @@
+{% extends "baselayout.html" %}
+{% block body %}
+
+<div class="container-fluid" style="position: relative">
+      <div class="row">
+        <div class="col pt-1 fst-italic" align="right">
+            **Last Updated On: {{month}}
+        </div>
+      </div>
+</div>
+
+<div class="container-fluid" >
+    <div class="row" >
+        <div class="col" style="width:100px;height:100px">
+           <canvas id="impactareas" ></canvas>
+        </div>
+        <div class="col" style="width:100px;height:100px">
+         <!--canvas id="myChartfour" ></canvas-->
+        </div>
+        <div class="col" style="width:100px;height:100spx">
+           <canvas id="impactapplications" ></canvas>
+        </div>
+
+     </div>
+</div>
+
+<!--/br></br></br></br></br></br></br></br></br></br-->
+<div class="container-fluid">
+      <div class="row" >
+        <div class="col">
+            <canvas id="edatype" style="width:240px;height:50px"></canvas>
+        </div>
+      </div>
+</div>
+</br>
+<div class="container-fluid">
+  <label for="exampleFormControlTextarea1" class="form-label"><h1>Action Items</h1></label>
+  <textarea class="form-control p-3" id="exampleFormControlTextarea1" rows="5" readonly="readonly" aria-current="page">{{edalearning}}</textarea>
+</div>
+</br>
+
+
+
+<script>
+    const ctxoneone = document.getElementById('impactareas').getContext('2d');
+    const impactareas = new Chart(ctxoneone, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for key in impactareaskeys %}'{{key}}',{% endfor %}],
+            datasets: [{
+                label: '#',
+                data: [{% for value in impactareasvalues %}{{value}},{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+                  formatter: function(value, context) {
+                  return context.chart.data.datasets[0].data[context.dataIndex];
+                }
+            }
+          },
+          legend: { display: true },
+          title: {
+            display: true,
+            text: 'Top 5 Impact Areas'
+          }
+        }
+    });
+
+</script>
+
+
+<script>
+    const ctxonetwo = document.getElementById('impactapplications').getContext('2d');
+    const impactapplications = new Chart(ctxonetwo, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for key in impactapplicationskeys %}'{{key}}',{% endfor %}],
+            datasets: [{
+                label: '#',
+                data: [{% for value in impactapplicationsvalues %}{{value}},{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(75, 192, 192, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+                  formatter: function(value, context) {
+                  return context.chart.data.datasets[0].data[context.dataIndex];
+                }
+            }
+          },
+          legend: { display: true },
+          title: {
+            display: true,
+            text: 'Top 5 Applications'
+          }
+        }
+    });
+
+</script>
+
+<script>
+    const ctxonethree = document.getElementById('edatype').getContext('2d');
+    const edatype = new Chart(ctxonethree, {
+        type: 'bar',
+        data: {
+          labels: [{% for key in edapreviousmonthkeys %}'{{key}}',{% endfor %}],
+          datasets: [
+            {
+              label: "{{previousmonth}} - Total Jiras: {{totalpreviousmonth}}",
+              backgroundColor: "#20c997",
+              data: [{% for value in edapreviousmonthvalues %}{{value}},{% endfor %}]
+            }, {
+              label: "{{currentmonth}} - Total Jiras: {{totalcurrentmonth}}",
+              backgroundColor: "#0d6efd",
+              data: [{% for value in edacurrentmonthvalues %}{{value}},{% endfor %}]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }]
+                },
+          title: {
+            display: true,
+            text: 'Escape Defect Analysis'
+          }
+        }
+    });
+</script>
+
+{% endblock body %}
